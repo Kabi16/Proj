@@ -9,7 +9,7 @@
 @SET PROFILE="src\dotnetHelloWorld\bin\%MODE%\staging"
 
   
-@SET MSBUILDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin
+@SET MSBUILDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
 
 @ECHO Hello Word Publishing to folder in %MODE% mode..
 @SET StartTime=%Time%
