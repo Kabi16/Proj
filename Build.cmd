@@ -8,7 +8,7 @@ REM Provide solution path and sonar key for the service
 @SET SOLUPATH="C:\dotnethelloworld\HelloWorld"
 
 
-@SET MSBUILDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin
+@SET MSBUILDDIR=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin
 
 
 @ECHO *** Build Script Execution Starts ***
