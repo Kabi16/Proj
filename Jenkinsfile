@@ -1,16 +1,42 @@
-//def ReleaseDir = "C:\Helloworld"
 pipeline {
-			agent any
-			stages {
-				stage('Source'){
-					steps{
-						checkout([$class: 'Git', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'http://192.168.29.24:5959']]])
-					}
-				}
-				stage('Build') {
-    					steps {
-    					    bat "\"${tool 'MSBuild'}\" dotnetHelloWorld.sln /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:SkipInvalidConfigurations=true /t:build /p:Configuration=Release /p:Platform=\"Any CPU\" /p:DeleteExistingFiles=True /p:publishUrl=c:\\Helloworld"
-    					}
-				}
-			}
-}
+
+   agent any
+  
+   stages {
+   
+     stage('SonarQube analysis') {
+      steps {
+         script {
+        def scannerHome = tool 'SonarQube';
+        withSonarQubeEnv('SonarQube') {
+           bat "${scannerHome}/bin/sonar-scanner \
+              -D sonar.login=admin \
+              -D sonar.password=admin123 \
+              -D sonar.projectKey=SonarQube1 \
+              -D sonar.exclusions=vendor/**,resources/**,**/*.java \
+              -D sonar.host.url=http://5CG8301V3J:9000/"
+           }
+        }
+     }
+ stages {
+
+stage('Build'){
+   steps{
+      bat "call Build.cmd"
+    }
+ }
+stage('Publish'){
+     steps{
+       bat "call Publish.cmd"
+     }
+ }
+	     
+  stage('Deploy'){
+     steps{
+       bat "call Deploy.ps1"
+         }
+        }
+      }
+     }
+  }
+ }
