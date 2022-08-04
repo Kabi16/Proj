@@ -1,7 +1,11 @@
 pipeline {
-
-   agent any
-  
+    agent { 
+        label {
+            label 'BuildPipeline'
+            customWorkspace "C:\Workspace\BuildPipeline"
+            }
+          }
+      } 
    stages {
    
      stage('SonarQube analysis') {
